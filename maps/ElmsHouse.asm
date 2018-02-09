@@ -1,6 +1,5 @@
 const_value set 2
-	const ELMSHOUSE_ELMS_WIFE
-	const ELMSHOUSE_ELMS_SON
+	const ELMSHOUSE_OLD_LADY
 
 ElmsHouse_MapScriptHeader:
 .SceneScripts:
@@ -9,78 +8,54 @@ ElmsHouse_MapScriptHeader:
 .MapCallbacks:
 	db 0
 
-ElmsWife:
-	jumptextfaceplayer ElmsWifeText
-
-ElmsSon:
-	jumptextfaceplayer ElmsSonText
-
-ElmsHousePC:
-	jumptext ElmsHousePCText
+OldLadyScript:
+	faceplayer
+	opentext
+	writetext OldLadyShouldIHealText
+	yesorno
+	iffalse .HaveANiceDay
+	closetext
+	special Special_FadeBlackQuickly
+	special Special_ReloadSpritesNoPalettes
+	playmusic MUSIC_HEAL
+	special TrainerRankings_Healings
+	special HealParty
+	pause 60
+	special Special_FadeInQuickly
+	special RestartMapMusic
+	opentext
+	
+.HaveANiceDay:
+	writetext OldLadayHaveANiceDayText
+	waitbutton
+	closetext
+	end
 
 ElmsHouseBookshelf:
 	jumpstd difficultbookshelf
+	
+ElmsHouseOldTVShowScript:
+	jumptext ElmsHouseOldTVShowText
 
-ElmsWifeText:
-	text "Hi, <PLAY_G>! My"
-	line "husband's always"
-
-	para "so busy--I hope"
-	line "he's OK."
-
-	para "When he's caught"
-	line "up in his #MON"
-
-	para "research, he even"
-	line "forgets to eat."
+OldLadyShouldIHealText:
+	text "Well hello there"
+	line "<PLAYER>!"
+	
+	para "Your #MON look"
+	line "tired."
+	
+	para "Do you want me to"
+	line "heal them for you?"
 	done
-
-ElmsSonText:
-	text "When I grow up,"
-	line "I'm going to help"
-	cont "my dad!"
-
-	para "I'm going to be a"
-	line "great #MON"
-	cont "professor!"
+	
+OldLadayHaveANiceDayText:
+	text "You have a good"
+	line "one sweetie."
 	done
-
-ElmsHouseLabFoodText:
-; unused
-	text "There's some food"
-	line "here. It must be"
-	cont "for the LAB."
-	done
-
-ElmsHousePokemonFoodText:
-; unused
-	text "There's some food"
-	line "here. This must be"
-	cont "for #MON."
-	done
-
-ElmsHousePCText:
-	text "#MON. Where do"
-	line "they come from? "
-
-	para "Where are they"
-	line "going?"
-
-	para "Why has no one"
-	line "ever witnessed a"
-	cont "#MON's birth?"
-
-	para "I want to know! I"
-	line "will dedicate my"
-
-	para "life to the study"
-	line "of #MON!"
-
-	para "…"
-
-	para "It's a part of"
-	line "PROF.ELM's re-"
-	cont "search papers."
+	
+ElmsHouseOldTVShowText:
+	text "It's a really old"
+	line "television show."
 	done
 
 ElmsHouse_MapEventHeader:
@@ -89,19 +64,18 @@ ElmsHouse_MapEventHeader:
 
 .Warps:
 	db 2
-	warp_def 2, 7, 4, NEW_BARK_TOWN
-	warp_def 3, 7, 4, NEW_BARK_TOWN
+	warp_def 2, 7, 3, NEW_BARK_TOWN
+	warp_def 3, 7, 3, NEW_BARK_TOWN
 
 .CoordEvents:
 	db 0
 
 .BGEvents:
 	db 3
-	bg_event 0, 1, BGEVENT_READ, ElmsHousePC
+	bg_event 4, 1, BGEVENT_READ, ElmsHouseOldTVShowScript
 	bg_event 6, 1, BGEVENT_READ, ElmsHouseBookshelf
 	bg_event 7, 1, BGEVENT_READ, ElmsHouseBookshelf
 
 .ObjectEvents:
-	db 2
-	object_event 1, 5, SPRITE_TEACHER, SPRITEMOVEDATA_WALK_UP_DOWN, 0, 1, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_SCRIPT, 0, ElmsWife, -1
-	object_event 5, 4, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, ElmsSon, -1
+	db 1
+	object_event 2, 4, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_DOWN, 0, 1, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, OldLadyScript, -1

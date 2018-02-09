@@ -7,7 +7,7 @@
 	charmap "<KOUGEKI>", $23 ; "こうげき"
 	charmap "<POKE>",    $24 ; "<PO><KE>"
 	charmap "%",         $25
-	charmap "<RED>",     $38 ; RedsName
+	charmap "<YOU>",     $38 ; YourName
 	charmap "<GREEN>",   $39 ; GreensName
 	charmap "<ENEMY>",   $3f
 	charmap "<MOM>",     $49 ; MomsName

@@ -230,7 +230,7 @@ ENDM
 	dict $35,         Char35
 	dict $36,         Char36
 	dict $37,         Char37
-	dict "<RED>",     PrintRedsName
+	dict "<YOU>",     PrintYourName
 	dict "<GREEN>",   PrintGreensName
 	dict "#",         PlacePOKe
 	dict "<PC>",      PCChar
@@ -318,7 +318,7 @@ ENDM
 PrintMomsName:   print_name MomsName   ; 1186
 PrintPlayerName: print_name PlayerName ; 118d
 PrintRivalName:  print_name RivalName  ; 1194
-PrintRedsName:   print_name RedsName   ; 119b
+PrintYourName:   print_name YourName   ; 119b
 PrintGreensName: print_name GreensName ; 11a2
 
 TrainerChar:  print_name TrainerCharText ; 11a9

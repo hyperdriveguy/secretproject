@@ -803,21 +803,17 @@ UnknownText_0x1c144d::
 	prompt
 
 UnknownText_0x1c1462::
-	text "Access whose PC?"
+	text "Access which"
+	line "storage?"
 	done
 
 UnknownText_0x1c1474::
-	text "BILL's PC"
-	line "accessed."
-
-	para "#MON Storage"
+	text "#MON Storage"
 	line "System opened."
 	prompt
 
 UnknownText_0x1c14a4::
-	text "Accessed own PC."
-
-	para "Item Storage"
+	text "Item Storage"
 	line "System opened."
 	prompt
 
@@ -1175,46 +1171,36 @@ _OakText1::
 	text "Hello! Sorry to"
 	line "keep you waiting!"
 
-	para "Welcome to the"
-	line "world of #MON!"
+	para "My name is <YOU>."
 
-	para "My name is OAK."
-
-	para "People call me the"
-	line "#MON PROF."
+	para "But you knew that,"
+	line "right?"
 	prompt
 
 _OakText2::
-	text "This world is in-"
-	line "habited by crea-"
-	cont "tures that we call"
-	cont "#MON.@@"
+	text "Anyway, this is a"
+	line "#MON.@@"
 
 _OakText3::
 	text_waitbutton
 	db "@@"
 
 _OakText4::
-	text "People and #MON"
-	line "live together by"
-
-	para "supporting each"
-	line "other."
-
-	para "Some people play"
-	line "with #MON, some"
-	cont "battle with them."
+	text "Some view #MON"
+	line "as pets."
+	
+	para "But it is common"
+	line "for people to hone"
+	cont "their abilities"
+	cont "and have them"
+	cont "battle."
+	
+	para "Pretty cool,"
+	line "right?"
 	prompt
 
 _OakText5::
-	text "But we don't know"
-	line "everything about"
-	cont "#MON yet."
-
-	para "There are still"
-	line "many mysteries to"
-	cont "solve."
-
-	para "That's why I study"
-	line "#MON every day."
+	text "As for me, I am"
+	line "one who likes the"
+	cont "thrill of battle."
 	prompt

@@ -444,12 +444,12 @@ ENDM
 	mapgroup ROUTE_26,                                    54, 10 ;  1
 	mapgroup ROUTE_27,                                     9, 40 ;  2
 	mapgroup ROUTE_29,                                     9, 30 ;  3
-	mapgroup NEW_BARK_TOWN,                                9, 10 ;  4
+	mapgroup NEW_BARK_TOWN,                               12, 14 ;  4
 	mapgroup ELMS_LAB,                                     6,  5 ;  5
 	mapgroup KRISS_HOUSE_1F,                               4,  5 ;  6
 	mapgroup KRISS_HOUSE_2F,                               3,  4 ;  7
-	mapgroup KRISS_NEIGHBORS_HOUSE,                        4,  4 ;  8
-	mapgroup ELMS_HOUSE,                                   4,  4 ;  9
+	mapgroup CARSONS_HOUSE,                                6,  5 ;  8
+	mapgroup OLD_LADYS_HOUSE,                              4,  4 ;  9
 	mapgroup ROUTE_26_HEAL_SPEECH_HOUSE,                   4,  4 ; 10
 	mapgroup ROUTE_26_DAY_OF_WEEK_SIBLINGS_HOUSE,          4,  4 ; 11
 	mapgroup ROUTE_27_SANDSTORM_HOUSE,                     4,  4 ; 12

@@ -188,7 +188,6 @@ CianwoodLugiaSpeechHouse_BlockData:
 PokeSeersHouse_BlockData:
 ViridianNicknameSpeechHouse_BlockData:
 Route2NuggetSpeechHouse_BlockData:
-KrissNeighborsHouse_BlockData:
 Route26HealSpeechHouse_BlockData:
 Route26DayofWeekSiblingsHouse_BlockData:
 Route27SandstormHouse_BlockData:
@@ -913,8 +912,8 @@ PewterGym_BlockData:
 CeladonGym_BlockData:
 	INCBIN "maps/CeladonGym.blk"
 
-BetaHouse2_BlockData:
-	INCBIN "maps/BetaHouse2.blk"
+CarsonsHouse_BlockData:
+	INCBIN "maps/CarsonsHouse.blk"
 
 CeladonCafe_BlockData:
 	INCBIN "maps/CeladonCafe.blk"

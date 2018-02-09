@@ -71,7 +71,7 @@ NewGame: ; 5b6b
 	ld [wMonStatusFlags], a
 	call ResetWRAM
 	call NewGame_ClearTileMapEtc
-	call AreYouABoyOrAreYouAGirl
+	call YouAreAGirl
 	call OakSpeech
 	call InitializeWorld
 	ld a, 1
@@ -85,7 +85,7 @@ NewGame: ; 5b6b
 	jp FinishContinueFunction
 ; 5b8f
 
-AreYouABoyOrAreYouAGirl: ; 5b8f
+YouAreAGirl: ; 5b8f
 	farcall Mobile_AlwaysReturnNotCarry ; some mobile stuff
 	jr c, .ok
 	farcall InitGender
@@ -292,16 +292,18 @@ InitializeNPCNames: ; 5ce9
 	ld de, RivalName
 	call .Copy
 
+	ld hl, YourNameInit
+	ld de, YourName
+	call .Copy
+	
 	ld hl, .Mom
 	ld de, MomsName
 	call .Copy
 
-	ld hl, .Red
-	ld de, RedsName
-	call .Copy
-
 	ld hl, .Green
 	ld de, GreensName
+	
+	;farcall YourNameInit
 
 .Copy:
 	ld bc, NAME_LENGTH
@@ -309,10 +311,11 @@ InitializeNPCNames: ; 5ce9
 	ret
 
 .Rival:  db "???@"
-.Red:    db "RED@"
 .Green:  db "GREEN@"
 .Mom:    db "MOM@"
 ; 5d23
+
+INCLUDE "engine/your_name.asm"
 
 InitializeWorld: ; 5d23
 	call ShrinkPlayer
@@ -672,8 +675,11 @@ Continue_DisplayGameTime: ; 5f84
 
 OakSpeech: ; 0x5f99
 	farcall InitClock
+	farcall Special_SetDayOfWeek
 	call RotateFourPalettesLeft
 	call ClearTileMap
+
+if !DEF(DEBUG)
 
 	ld de, MUSIC_ROUTE_30
 	call PlayMusic
@@ -682,20 +688,19 @@ OakSpeech: ; 0x5f99
 	call RotateThreePalettesRight
 	xor a
 	ld [CurPartySpecies], a
-	ld a, POKEMON_PROF
+	ld a, SCHOOLBOY
 	ld [TrainerClass], a
 	call Intro_PrepTrainerPic
 
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
 	call Intro_RotatePalettesLeftFrontpic
-
 	ld hl, OakText1
 	call PrintText
 	call RotateThreePalettesRight
 	call ClearTileMap
 
-	ld a, WOOPER
+	ld a, PIKACHU
 	ld [CurSpecies], a
 	ld [CurPartySpecies], a
 	call GetBaseData
@@ -720,7 +725,7 @@ OakSpeech: ; 0x5f99
 
 	xor a
 	ld [CurPartySpecies], a
-	ld a, POKEMON_PROF
+	ld a, SCHOOLBOY
 	ld [TrainerClass], a
 	call Intro_PrepTrainerPic
 
@@ -743,9 +748,12 @@ OakSpeech: ; 0x5f99
 
 	ld hl, OakText6
 	call PrintText
+endc
 	call NamePlayer
+if !DEF(DEBUG)
 	ld hl, OakText7
 	call PrintText
+endc
 	ret
 
 OakText1: ; 0x6045
@@ -755,7 +763,7 @@ OakText1: ; 0x6045
 OakText2: ; 0x604a
 	text_jump _OakText2
 	start_asm
-	ld a, WOOPER
+	ld a, PIKACHU
 	call PlayCry
 	call WaitSFX
 	ld hl, OakText3
@@ -782,14 +790,9 @@ OakText7: ; 0x606f
 	db "@"
 
 NamePlayer: ; 0x6074
-	farcall MovePlayerPicRight
-	farcall ShowPlayerNamingChoices
-	ld a, [wMenuCursorY]
-	dec a
-	jr z, .NewName
+	jp .NewName
 	call StorePlayerName
 	farcall ApplyMonOrTrainerPals
-	farcall MovePlayerPicLeft
 	ret
 
 .NewName:
@@ -822,9 +825,9 @@ NamePlayer: ; 0x6074
 	ret
 
 .Chris:
-	db "CHRIS@@@@@@"
+	db "Chris@@@@@@"
 .Kris:
-	db "KRIS@@@@@@@"
+	db "Kris@@@@@@@"
 ; 60e9
 
 Function60e9: ; Unreferenced
@@ -1415,5 +1418,7 @@ GameInit:: ; 642e
 	ld a, $90
 	ld [hWY], a
 	call WaitBGMap
-	jp CrystalIntroSequence
+	; jp CrystalIntroSequence <- Skip this
+	; jump straight to the menu
+	jp _MainMenu
 ; 6454

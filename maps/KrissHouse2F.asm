@@ -47,18 +47,8 @@ BigDoll:
 GameConsole:
 	describedecoration 4
 
-KrissHousePoster:
-	dw EVENT_KRISS_ROOM_POSTER, .Script
-
-.Script:
-	describedecoration 0
-
 KrissHouseRadio:
-	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue .NormalRadio
-	checkevent EVENT_LISTENED_TO_INITIAL_RADIO
-	iftrue .AbbreviatedRadio
-	playmusic MUSIC_POKEMON_TALK
+	playmusic MUSIC_RUINS_OF_ALPH_RADIO
 	opentext
 	writetext KrisRadioText1
 	pause 45
@@ -66,15 +56,11 @@ KrissHouseRadio:
 	pause 45
 	writetext KrisRadioText3
 	pause 45
-	musicfadeout MUSIC_NEW_BARK_TOWN, 16
+	musicfadeout MUSIC_NEW_BARK_TOWN, 10
 	writetext KrisRadioText4
-	pause 45
+	waitbutton
 	closetext
-	setevent EVENT_LISTENED_TO_INITIAL_RADIO
 	end
-
-.NormalRadio:
-	jumpstd radio1
 
 .AbbreviatedRadio:
 	opentext
@@ -95,25 +81,34 @@ KrissHousePC:
 .Warp:
 	warp NONE, $0, $0
 	end
+	
+KrissHousePoster:
+	opentext
+	writetext KrissHousePosterText
+	waitbutton
+	closetext
+	end
+
+KrissHousePosterText:
+	text "It's a Studio C"
+	line "poster!"
+	done
 
 KrisRadioText1:
-	text "PROF.OAK'S #MON"
-	line "TALK! Please tune"
-	cont "in next time!"
+	text "Kzzzt…"
 	done
 
 KrisRadioText2:
-	text "#MON CHANNEL!"
+	text "Zzzzt…"
 	done
 
 KrisRadioText3:
-	text "This is DJ MARY,"
-	line "your co-host!"
+	text "Bzzzzzzrrrtttt…"
 	done
 
 KrisRadioText4:
-	text "#MON!"
-	line "#MON CHANNEL…"
+	text "I think it's"
+	line "broken…"
 	done
 
 KrissHouse2F_MapEventHeader:
@@ -132,7 +127,7 @@ KrissHouse2F_MapEventHeader:
 	bg_event 2, 1, BGEVENT_UP, KrissHousePC
 	bg_event 3, 1, BGEVENT_READ, KrissHouseRadio
 	bg_event 5, 1, BGEVENT_READ, KrissHouseBookshelf
-	bg_event 6, 0, BGEVENT_IFSET, KrissHousePoster
+	bg_event 6, 0, BGEVENT_READ, KrissHousePoster
 
 .ObjectEvents:
 	db 4

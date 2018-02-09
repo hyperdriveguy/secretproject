@@ -4,13 +4,13 @@ else
 SHA1 := sha1sum
 endif
 
-RGBASM := rgbasm
-RGBFIX := rgbfix
-RGBGFX := rgbgfx
-RGBLINK := rgblink
+RGBASM := rgbasm3
+RGBFIX := rgbfix3
+RGBGFX := rgbgfx3
+RGBLINK := rgblink3
 
 .SUFFIXES:
-.PHONY: all clean tools compare crystal crystal11
+.PHONY: all clean tools compare crystal crystal11 debug
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
@@ -33,16 +33,19 @@ lib/mobile/main.o \
 text/common_text.o
 
 crystal11_obj := $(crystal_obj:.o=11.o)
+debug_obj := $(crystal_obj:.o=debug.o)
 
 
-roms := pokecrystal.gbc pokecrystal11.gbc
+roms := pokecrystal.gbc pokecrystal11.gbc debug.gbc
 
 all: crystal
 crystal: pokecrystal.gbc
 crystal11: pokecrystal11.gbc
+debug: debug.gbc
 
 clean:
-	rm -f $(roms) $(crystal_obj) $(crystal11_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym)
+	rm -f $(roms) $(crystal_obj) $(crystal11_obj) $(debug_obj)
+	rm -f $(roms:.gbc=.map) $(roms:.gbc=.sym) $(roms:.gbc=.sav)
 	$(MAKE) clean -C tools/
 
 compare: $(roms)
@@ -53,6 +56,7 @@ tools:
 
 
 $(crystal11_obj): RGBASMFLAGS = -D CRYSTAL11
+$(debug_obj): RGBASMFLAGS = -D DEBUG
 
 # The dep rules have to be explicit or else missing files won't be reported.
 # As a side effect, they're evaluated immediately instead of when the rule is invoked.
@@ -69,10 +73,16 @@ ifeq (,$(filter clean tools,$(MAKECMDGOALS)))
 $(info $(shell $(MAKE) -C tools))
 
 $(foreach obj, $(crystal11_obj), $(eval $(call DEP,$(obj),$(obj:11.o=.asm))))
+$(foreach obj, $(debug_obj), $(eval $(call DEP,$(obj),$(obj:debug.o=.asm))))
 $(foreach obj, $(crystal_obj), $(eval $(call DEP,$(obj),$(obj:.o=.asm))))
 
 endif
 
+
+debug.gbc: $(debug_obj) pokecrystal.link
+	$(RGBLINK) -n debug.sym -m debug.map -l pokecrystal.link -o $@ $(debug_obj)
+	$(RGBFIX) -Cjv -i BYTE -k 01 -l 0x33 -m 0x10 -p 0 -r 3 -t PKASKHEROUT $@
+	sort debug.sym -o debug.sym
 
 pokecrystal11.gbc: $(crystal11_obj) pokecrystal.link
 	$(RGBLINK) -n pokecrystal11.sym -m pokecrystal11.map -l pokecrystal.link -o $@ $(crystal11_obj)

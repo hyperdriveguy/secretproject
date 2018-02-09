@@ -205,7 +205,7 @@ INCLUDE "mobile/mobile_12_2.asm"
 INCLUDE "engine/events/buena_menu.asm"
 
 
-SECTION "bank13", ROMX
+SECTION "Tileset Palettes", ROMX
 
 INCLUDE "engine/map_palettes.asm"
 INCLUDE "tilesets/palette_maps.asm"
@@ -216,6 +216,8 @@ rept 26
 	db $06
 endr
 ; 0x4ce1f
+
+SECTION "bank13", ROMX
 
 INCLUDE "data/collision_permissions.asm"
 INCLUDE "engine/routines/emptyallsrambanks.asm"

@@ -1,7 +1,7 @@
 const_value set 2
 	const CARSONSHOUSE_CARSONSMOM
 
-KrissNeighborsHouse_MapScriptHeader:
+CarsonsHouse_MapScriptHeader:
 .SceneScripts:
 	db 0
 
@@ -13,42 +13,51 @@ CarsonsMom:
 
 CarsonsHouseBookshelf:
 	jumpstd magazinebookshelf
+	
+CarsonsHousePC:
+	opentext
+	writetext CarsonsHousePCText
+	waitbutton
+	closetext
+	end
 
-CarsonsMomText:
-	text "PIKACHU is an"
-	line "evolved #MON."
-
-	para "I was amazed by"
-	line "PROF.ELM's find-"
-	cont "ings."
-
-	para "He's so famous for"
-	line "his research on"
-	cont "#MON evolution."
-
-	para "…sigh…"
-
-	para "I wish I could be"
-	line "a researcher like"
-	cont "him…"
+CarsonsHousePCText:
+	text "The screen reads:"
+	
+	para "Property of"
+	line "<YOU>"
+	
+	para "ENTER PASSWORD"
 	done
 
-KrissNeighborsHouse_MapEventHeader:
+CarsonsMomText:
+	text "You're <PLAYER>,"
+	line "right?"
+	
+	para "<YOU> has been"
+	line "looking for you."
+	
+	para "I think he wanted"
+	line "ask you something."
+	done
+
+CarsonsHouse_MapEventHeader:
 	; filler
 	db 0, 0
 
 .Warps:
 	db 2
-	warp_def 2, 7, 2, NEW_BARK_TOWN
-	warp_def 3, 7, 2, NEW_BARK_TOWN
+	warp_def 4, 11, 2, NEW_BARK_TOWN
+	warp_def 5, 11, 2, NEW_BARK_TOWN
 
 .CoordEvents:
 	db 0
 
 .BGEvents:
-	db 2
+	db 3
 	bg_event 0, 1, BGEVENT_READ, CarsonsHouseBookshelf
 	bg_event 1, 1, BGEVENT_READ, CarsonsHouseBookshelf
+	bg_event 6, 1, BGEVENT_UP, CarsonsHousePC
 
 .ObjectEvents:
 	db 1

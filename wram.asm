@@ -2264,7 +2264,7 @@ PlayerID:: ; d47b
 PlayerName:: ds NAME_LENGTH ; d47d
 MomsName::   ds NAME_LENGTH ; d488
 RivalName::  ds NAME_LENGTH ; d493
-RedsName::   ds NAME_LENGTH ; d49e
+YourName::   ds NAME_LENGTH ; d49e
 GreensName:: ds NAME_LENGTH ; d4a9
 
 wSavedAtLeastOnce:: db

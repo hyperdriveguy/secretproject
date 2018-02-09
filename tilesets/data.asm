@@ -12,21 +12,6 @@ TilesetKantoColl: ; 0x18e06
 INCLUDE "tilesets/kanto_collision.asm"
 ; 0x19006
 
-Tileset0GFX: ; 0x19006
-TilesetJohto1GFX: ; 0x19006
-INCBIN "gfx/tilesets/johto_1.2bpp.lz"
-; 0x19c0e
-
-Tileset0Meta: ; 0x19c0e
-TilesetJohto1Meta: ; 0x19c0e
-INCBIN "tilesets/johto_1_metatiles.bin"
-; 0x1a40e
-
-Tileset0Coll: ; 0x1a40e
-TilesetJohto1Coll: ; 0x1a40e
-INCLUDE "tilesets/johto_1_collision.asm"
-; 0x1a60e
-
 TilesetIcePathGFX: ; 0x1a60e
 INCBIN "gfx/tilesets/ice_path.2bpp.lz"
 ; 0x1af3e
@@ -427,3 +412,18 @@ INCBIN "tilesets/omanyte_word_room_metatiles.bin"
 TilesetAerodactylWordRoomMeta: ; 0x1e0c00
 INCBIN "tilesets/aerodactyl_word_room_metatiles.bin"
 ; 0x1e1000
+
+Tileset0GFX: ; 0x19006
+TilesetJohto1GFX: ; 0x19006
+INCBIN "gfx/tilesets/johto_1.2bpp.lz"
+; 0x19c0e
+
+Tileset0Meta: ; 0x19c0e
+TilesetJohto1Meta: ; 0x19c0e
+INCBIN "tilesets/johto_1_metatiles.bin"
+; 0x1a40e
+
+Tileset0Coll: ; 0x1a40e
+TilesetJohto1Coll: ; 0x1a40e
+INCLUDE "tilesets/johto_1_collision.asm"
+; 0x1a60e
